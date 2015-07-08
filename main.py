@@ -97,12 +97,12 @@ class Window(QtWidgets.QMainWindow):
         self.clockLayout = QtWidgets.QVBoxLayout()
         self.clockLayout.addWidget(self.clockWidget)
         self.clockLayout.addWidget(self.timeLabel)
-        #self.clockLayout.setAlignment(self.clockWidget, Qt.AlignHCenter)
+        self.clockLayout.setAlignment(self.clockWidget, Qt.AlignTop)
         self.clockLW = QtWidgets.QWidget()
         self.clockLW.setLayout(self.clockLayout)
         
         self.tabWidget.addTab(self.clockLW, 'Clock')
-        self.clockWidget.setMaximumWidth(200)
+        #self.clockWidget.setMaximumWidth(200)
         
         
         self.stopwatchButton.clicked.connect(self.startStopwatch)
@@ -151,6 +151,10 @@ class Window(QtWidgets.QMainWindow):
             secondsLeft = self.secondSpin.value()
             secondsLeft_MS = self.secondsToMilliseconds(secondsLeft)
             
+            self.secondSpin.hide()
+            self.secondSpinLabel.hide()
+            self.minuteSpin.hide()
+            self.minuteSpinLabel.hide()
             
             totalMS = minutesLeft_MS + secondsLeft_MS
             self.timerBar.setRange(0, totalMS)
@@ -163,6 +167,12 @@ class Window(QtWidgets.QMainWindow):
             minutesLeft, secondsLeft, millisecondsLeft, millisecondCounter = 0,0,0,0
             timerInProgress = False
             self.timerCount.setText('00:00.0000')
+            
+            self.secondSpin.show()
+            self.secondSpinLabel.show()
+            self.minuteSpin.show()
+            self.minuteSpinLabel.show()
+            
             self.timerButton.setText('Start')
     
     
